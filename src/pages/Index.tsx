@@ -1,16 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
-import { Monitor, UserCog, Sparkles, Tv, UserCheck, FlaskConical, Globe, Star, CreditCard } from 'lucide-react';
+import { Monitor, UserCog, UserCheck, Star, CreditCard } from 'lucide-react';
 
 const Index = () => {
   const sections = [
     { title: 'Accueil', description: 'Gestion de la reception et de la file', icon: Monitor, href: '/accueil/login', variant: 'outline' as const },
     { title: 'Manager', description: 'Tableau de bord analytique', icon: UserCog, href: '/manager/login', variant: 'outline' as const },
     { title: 'Docteur', description: 'Tableau de bord de soins', icon: UserCheck, href: '/doctor/login', variant: 'outline' as const },
-    { title: 'Laboratoire', description: 'Suivi des envois & prothèses', icon: FlaskConical, href: '/labo', variant: 'outline' as const },
-    { title: 'Site Web', description: 'Présentation de la clinique', icon: Globe, href: '/website', variant: 'outline' as const },
-    { title: 'Rendez-vous', description: 'Réservations du site web', icon: Sparkles, href: '/appointment/login', variant: 'outline' as const },
-    { title: 'Télévision', description: 'Affichage de la file d\'attente', icon: Tv, href: '/tv', variant: 'outline' as const },
     { title: 'Avis Patient', description: 'Formulaire de satisfaction', icon: Star, href: '/review', variant: 'outline' as const },
     { title: 'E-Carte Patient', description: 'Suivi de soins & paiements', icon: CreditCard, href: '/patient', variant: 'outline' as const },
   ];

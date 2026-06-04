@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smile, Frown } from 'lucide-react';
@@ -6,8 +5,6 @@ import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
 
 const Satisfaction = () => {
-  const navigate = useNavigate();
-
   const handleSatisfaction = async () => {
     try {
       const { error } = await supabase.rpc('increment_satisfied_count');
@@ -17,7 +14,7 @@ const Satisfaction = () => {
     } catch (error) {
       console.error('An unexpected error occurred:', error);
     } finally {
-      navigate('/avis-google');
+      window.location.href = 'https://search.google.com/local/writereview?placeid=ChIJMdVNhCCxjxIRR4IfBYih-aE';
     }
   };
 

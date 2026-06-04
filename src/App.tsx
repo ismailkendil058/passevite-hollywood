@@ -10,7 +10,6 @@ import DynamicManifest from "./components/DynamicManifest";
 const Index = lazy(() => import("./pages/Index"));
 const LoginAccueil = lazy(() => import("./pages/LoginAccueil"));
 const LoginManager = lazy(() => import("./pages/LoginManager"));
-const Website = lazy(() => import("./pages/Website"));
 const Accueil = lazy(() => import("./pages/Accueil"));
 const Client = lazy(() => import("./pages/Client"));
 const Manager = lazy(() => import("./pages/Manager"));
@@ -22,13 +21,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Depenses = lazy(() => import("./pages/Depenses"));
 const Factures = lazy(() => import("./pages/Factures"));
 const AjouterFacture = lazy(() => import("./pages/AjouterFacture"));
-const Appointment = lazy(() => import("./pages/Appointment"));
-const LoginAppointment = lazy(() => import("./pages/LoginAppointment"));
-const TV = lazy(() => import("./pages/TV"));
 const LoginMedecin = lazy(() => import("./pages/LoginMedecin"));
 const MedecinDashboard = lazy(() => import("./pages/MedecinDashboard"));
 const UserManager = lazy(() => import("./pages/UserManager"));
-const LaboPage = lazy(() => import("./pages/LaboPage"));
 const PatientCard = lazy(() => import("./pages/PatientCard"));
 
 
@@ -55,7 +50,6 @@ function ProtectedRoute({ children, requiredRoles }: { children: React.ReactNode
   if (loading) return <LoadingScreen />;
 
   if (!user) {
-    if (window.location.pathname.startsWith('/appointment')) return <Navigate to="/appointment/login" replace />;
     if (requiredRoles?.includes('manager')) return <Navigate to="/manager/login" replace />;
     if (requiredRoles?.includes('receptionist')) return <Navigate to="/accueil/login" replace />;
     return <Navigate to="/" replace />;
@@ -82,10 +76,8 @@ const App = () => (
         <Suspense fallback={<LoadingScreen />}>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/website" element={<Website />} />
             <Route path="/accueil/login" element={<LoginAccueil />} />
             <Route path="/manager/login" element={<LoginManager />} />
-            <Route path="/appointment/login" element={<LoginAppointment />} />
             <Route path="/client" element={<Client />} />
             <Route path="/review" element={<Satisfaction />} />
             <Route path="/feedback" element={<Feedback />} />
@@ -111,19 +103,13 @@ const App = () => (
             <Route path="/accueil/factures/ajouter" element={
               <ProtectedRoute requiredRoles={['manager', 'receptionist', 'admin']}><AjouterFacture /></ProtectedRoute>
             } />
-            <Route path="/labo" element={
-              <ProtectedRoute requiredRoles={['manager', 'receptionist', 'admin']}><LaboPage /></ProtectedRoute>
-            } />
+
 
 
 
             <Route path="/rendezvous" element={
               <ProtectedRoute requiredRoles={['manager', 'receptionist', 'admin']}><Rendezvous /></ProtectedRoute>
             } />
-            <Route path="/appointment" element={
-              <ProtectedRoute requiredRoles={['manager', 'admin']}><Appointment /></ProtectedRoute>
-            } />
-            <Route path="/tv" element={<TV />} />
             <Route path="/doctor/login" element={<LoginMedecin />} />
             <Route path="/doctor" element={
               <MedecinDashboard />

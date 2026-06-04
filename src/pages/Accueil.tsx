@@ -910,24 +910,26 @@ const Accueil = () => {
         </div>
         <div
           ref={doctorsScrollRef}
-          className="flex gap-2 p-3 sm:p-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
+          className="overflow-x-auto scrollbar-hide p-3 sm:p-4"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {doctorStats.map(ds => {
-            return (
-              <Card
-                key={ds.id}
-                className="border-0 shadow-sm shrink-0 w-28 sm:w-40 snap-start cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => setDoctorFilter(doctorFilter === ds.id ? 'all' : ds.id)}
-              >
-                <CardContent className="p-3 sm:p-4 text-center">
-                  <p className="text-xs font-medium text-muted-foreground mb-1 truncate">{ds.name}</p>
-                  <p className="text-xl sm:text-2xl font-bold text-foreground">{ds.waitingCount}</p>
-                  <p className="text-xs text-muted-foreground">en attente</p>
-                </CardContent>
-              </Card>
-            );
-          })}
+          <div className="inline-flex gap-3 min-w-full justify-center snap-x snap-mandatory">
+            {doctorStats.map(ds => {
+              return (
+                <Card
+                  key={ds.id}
+                  className="border-0 shadow-md shrink-0 w-36 sm:w-52 snap-start cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                  onClick={() => setDoctorFilter(doctorFilter === ds.id ? 'all' : ds.id)}
+                >
+                  <CardContent className="p-5 text-center">
+                    <p className="text-xs font-semibold text-muted-foreground mb-2 truncate uppercase tracking-wider">{ds.name}</p>
+                    <p className="text-4xl sm:text-5xl font-black text-primary leading-none">{ds.waitingCount}</p>
+                    <p className="text-[10px] text-muted-foreground mt-2 uppercase tracking-widest">en attente</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </div>
 
