@@ -13,7 +13,7 @@ const Merci = () => {
       <div className="text-center mb-16 relative z-10 max-w-2xl mx-auto animate-fade-in">
         {/* Logo */}
         <div className="inline-block mb-12 p-4 rounded-2xl bg-white shadow-2xl shadow-[#5B5BD6]/10 animate-float border border-[#5B5BD6]/10 mx-auto">
-          <img src="/VitalWeb.png" alt="PasseVite Logo" className="h-16 w-16 object-contain" />
+          <img src="/HD.jpg" alt="PasseVite Logo" className="h-16 w-16 object-contain" />
         </div>
 
         {/* Confirmation */}

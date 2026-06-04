@@ -22,7 +22,7 @@ const Index = () => {
 
       <div className="text-center mb-10 relative z-10 animate-fade-in gpu">
         <div className="inline-block mb-4 p-2 rounded-2xl bg-white shadow-xl shadow-primary/10 animate-float gpu border border-primary/5">
-          <img src="/VitalWeb.png" alt="PasseVite Logo" className="h-12 w-12 object-contain" />
+          <img src="/HD.jpg" alt="PasseVite Logo" className="h-12 w-12 object-contain" />
         </div>
         <h1 className="text-5xl md:text-6xl font-black text-primary tracking-tighter italic">
           PasseVite

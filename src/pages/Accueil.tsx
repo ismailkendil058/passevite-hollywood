@@ -647,7 +647,7 @@ const Accueil = () => {
       <header className="flex items-center justify-between p-3 sm:p-4 border-b sticky top-0 bg-background z-10">
         <div className="flex items-center gap-2.5">
           <div className="p-1 rounded-lg bg-white shadow-lg shadow-primary/5 border border-primary/5 shrink-0 hidden sm:block">
-            <img src="/VitalWeb.png" alt="Logo" className="h-6 w-6 object-contain" />
+            <img src="/HD.jpg" alt="Logo" className="h-6 w-6 object-contain" />
           </div>
           <div className="min-w-0">
             <h1 className="text-xl sm:text-2xl font-black text-primary tracking-tighter italic leading-none">

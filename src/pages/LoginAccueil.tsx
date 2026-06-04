@@ -48,7 +48,7 @@ const LoginAccueil = () => {
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div className="mx-auto block">
-            <img src="/VitalWeb.png" alt="Logo" className="h-10 w-auto brightness-0 opacity-80 mx-auto" />
+            <img src="/HD.jpg" alt="Logo" className="h-10 w-auto brightness-0 opacity-80 mx-auto" />
             <h1 className="text-3xl font-serif font-bold tracking-tight text-[#1F1F3D] mt-4 uppercase">PasseVite</h1>
             <p className="text-[10px] tracking-[0.4em] text-[#5C5CD6] mt-1 font-bold">PORTAIL ACCUEIL</p>
           </div>

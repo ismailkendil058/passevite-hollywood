@@ -27,7 +27,7 @@ const Satisfaction = () => {
       <div className="text-center mb-16 relative z-10 w-full max-w-4xl mx-auto animate-fade-in">
         {/* Logo */}
         <div className="inline-block mb-8 p-4 rounded-2xl bg-white shadow-2xl shadow-primary/10 animate-float border border-primary/10 mx-auto">
-          <img src="/VitalWeb.png" alt="PasseVite Logo" className="h-16 w-16 object-contain" />
+          <img src="/HD.jpg" alt="PasseVite Logo" className="h-16 w-16 object-contain" />
         </div>
 
         {/* Headline */}

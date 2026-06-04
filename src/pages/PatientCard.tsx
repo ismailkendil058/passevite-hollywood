@@ -200,7 +200,7 @@ const PatientCard = () => {
             <header className="p-4 sm:p-6 text-center border-b bg-white/50 backdrop-blur-md sticky top-0 z-50 gpu">
                 <div className="flex flex-col items-center">
                     <div className="inline-block p-1.5 rounded-xl bg-white shadow-lg shadow-primary/5 mb-2 border border-primary/5">
-                        <img src="/VitalWeb.png" alt="PasseVite Logo" className="h-8 w-8 object-contain" />
+                        <img src="/HD.jpg" alt="PasseVite Logo" className="h-8 w-8 object-contain" />
                     </div>
                     <h1 className="text-2xl sm:text-3xl font-black text-primary tracking-tighter italic animate-fade-in gpu">PasseVite</h1>
                     <p className="text-[10px] tracking-[0.3em] text-muted-foreground -mt-1 uppercase font-medium animate-fade-in gpu">le soin qui passe vite</p>
@@ -297,7 +297,7 @@ const PatientCard = () => {
                                     </div>
                                     <div className="flex flex-col items-end">
                                         <div className="p-1.5 bg-white rounded-xl shadow-lg mb-2">
-                                            <img src="/VitalWeb.png" alt="Logo" className="h-6 w-6 object-contain" />
+                                            <img src="/HD.jpg" alt="Logo" className="h-6 w-6 object-contain" />
                                         </div>
                                         <Badge variant="outline" className="border-white/20 text-white bg-white/10 backdrop-blur-sm text-[10px] uppercase font-bold tracking-widest px-3 py-1">E-CARTE</Badge>
                                     </div>

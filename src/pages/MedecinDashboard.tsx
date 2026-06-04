@@ -16,7 +16,7 @@ import {
     PieChart, DollarSign, Activity, FileDown, Edit3,
     X, Printer, ClipboardList, CheckCircle2, ChevronRight,
     LayoutDashboard, MapPin, Phone, ArrowUpRight, User, Trash2,
-    Calendar as CalIcon, MessageSquare, XCircle
+    Calendar as CalIcon, MessageSquare, XCircle, Lock
 } from 'lucide-react';
 import { format, parseISO, startOfToday, endOfToday, startOfDay } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -200,11 +200,11 @@ const MedecinDashboard = () => {
                 </div>
             </header>
 
-            <main className="p-4 lg:p-6 flex-1 space-y-6 max-w-7xl mx-auto w-full">
-                <Tabs defaultValue="ordonnances" className="w-full">
+            <main className="p-4 lg:p-6 flex-1 space-y-6 w-full">
+                <Tabs defaultValue="calendar" className="w-full">
                     <TabsList className="grid w-full grid-cols-4 bg-muted/50 p-1 rounded-xl h-12">
-                        <TabsTrigger value="ordonnances" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
-                            <FileText className="h-4 w-4 mr-2" /> Ordonnances
+                        <TabsTrigger value="ordonnances" disabled className="rounded-lg opacity-50 cursor-not-allowed data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                            <Lock className="h-4 w-4 mr-1.5" /><span className="hidden sm:inline">Ordonnances</span>
                         </TabsTrigger>
                         <TabsTrigger value="calendar" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
                             <CalendarIcon className="h-4 w-4 mr-2" /> Agenda
@@ -217,68 +217,22 @@ const MedecinDashboard = () => {
                         </TabsTrigger>
                     </TabsList>
 
-                    {/* ORDONNANCES CONTENT */}
+                    {/* ORDONNANCES CONTENT - LOCKED */}
                     <TabsContent value="ordonnances" className="mt-6 animate-in fade-in slide-in-from-bottom-2">
-                        <div className="flex flex-col gap-6">
-                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                                <h1 className="text-2xl font-black italic text-slate-800">Gestion des Ordonnances</h1>
-                                <Button onClick={() => navigate('/ordonnance')} className="rounded-xl h-11 px-6 shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90">
-                                    <Plus className="h-4 w-4 mr-2" /> Nouvelle Ordonnance
-                                </Button>
+                        <div className="relative rounded-3xl overflow-hidden border border-dashed border-slate-200 bg-slate-50/50 min-h-[400px] flex flex-col items-center justify-center gap-6 p-8 text-center">
+                            <div className="absolute inset-0 bg-white/70 backdrop-blur-sm z-10" />
+                            <div className="relative z-20 flex flex-col items-center gap-4">
+                                <div className="w-20 h-20 rounded-3xl bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center">
+                                    <Lock className="h-8 w-8 text-slate-400" />
+                                </div>
+                                <div className="space-y-2">
+                                    <h2 className="text-2xl font-black italic text-slate-700">Section Verrouillée</h2>
+                                    <p className="text-sm text-slate-400 font-medium max-w-xs">
+                                        La gestion des ordonnances n'est pas encore disponible dans cette version.
+                                    </p>
+                                    <p className="text-xs text-slate-300 font-bold uppercase tracking-widest mt-2">Bientôt disponible</p>
+                                </div>
                             </div>
-
-                            <Card className="border-none shadow-premium overflow-hidden bg-gradient-to-br from-white to-slate-50">
-                                <CardHeader className="p-6 border-b bg-muted/10">
-                                    <div className="flex flex-wrap gap-4 items-center">
-                                        <div className="relative flex-1 min-w-[200px]">
-                                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                            <Input
-                                                placeholder="Rechercher par patient ou médicament..."
-                                                value={searchOrdonnance}
-                                                onChange={e => setSearchOrdonnance(e.target.value)}
-                                                className="pl-10 h-11 border-slate-200 rounded-xl focus:ring-primary/20"
-                                            />
-                                        </div>
-                                    </div>
-                                </CardHeader>
-                                <CardContent className="p-0">
-                                    <Table>
-                                        <TableHeader className="bg-muted/30">
-                                            <TableRow>
-                                                <TableHead className="font-bold text-xs">Patient</TableHead>
-                                                <TableHead className="font-bold text-xs">Date</TableHead>
-                                                <TableHead className="font-bold text-xs">Médicaments</TableHead>
-                                                <TableHead className="text-right font-bold text-xs">Action</TableHead>
-                                            </TableRow>
-                                        </TableHeader>
-                                        <TableBody>
-                                            {filteredPrescriptions.map(rx => (
-                                                <TableRow key={rx.id} className="hover:bg-slate-50/80 transition-colors">
-                                                    <TableCell className="font-bold">{rx.patient_name}</TableCell>
-                                                    <TableCell className="text-slate-500 text-sm">
-                                                        {format(new Date(rx.prescription_date), 'dd MMM yyyy', { locale: fr })}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <div className="flex flex-wrap gap-1">
-                                                            {rx.medications?.slice(0, 2).map((med: any, i: number) => (
-                                                                <Badge key={i} variant="secondary" className="bg-slate-100 text-[10px] font-medium border-0">
-                                                                    {med.name}
-                                                                </Badge>
-                                                            ))}
-                                                            {rx.medications?.length > 2 && <span className="text-[10px] text-slate-400">+{rx.medications.length - 2}</span>}
-                                                        </div>
-                                                    </TableCell>
-                                                    <TableCell className="text-right">
-                                                        <Button variant="ghost" size="sm" onClick={() => navigate('/ordonnance')} className="rounded-lg h-8 w-8 text-primary hover:bg-primary/5">
-                                                            <FileText className="h-4 w-4" />
-                                                        </Button>
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </CardContent>
-                            </Card>
                         </div>
                     </TabsContent>
 
