@@ -57,8 +57,9 @@ const LoginMedecin = () => {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-[#F7F7FD] p-4 font-sans selection:bg-[#5C5CD6]/30">
+        <div className="flex min-h-screen items-center justify-center bg-white p-4 font-sans">
             <Card className="w-full max-w-md shadow-2xl border-none rounded-[2.5rem] bg-white overflow-hidden">
+
                 <CardHeader className="text-center space-y-6 pt-10 pb-2 relative">
                     <Button
                         variant="ghost"
@@ -69,13 +70,15 @@ const LoginMedecin = () => {
                         <ArrowLeft className="h-5 w-5" />
                     </Button>
                     <div className="mx-auto block">
-                        <img src="/HD.jpg" alt="Logo" className="h-10 w-auto brightness-0 opacity-80 mx-auto" />
-                        <h1 className="text-3xl font-serif font-bold tracking-tight text-[#1F1F3D] mt-4 uppercase">PasseVite</h1>
-                        <p className="text-[10px] tracking-[0.4em] text-[#5C5CD6] mt-1 font-bold">PORTAIL EQUIPE</p>
+
+                        <h1 className="text-3xl font-serif font-bold tracking-tight text-primary mt-4 uppercase">PasseVite</h1>
+                        <p className="text-[10px] tracking-[0.4em] text-muted-foreground mt-1 font-bold">PORTAIL EQUIPE</p>
+
                     </div>
-                    <div className="w-16 h-16 rounded-3xl bg-[#5C5CD6]/10 flex items-center justify-center mx-auto shadow-sm">
-                        <Users className="h-8 w-8 text-[#5C5CD6]" />
+                    <div className="w-16 h-16 rounded-3xl bg-primary/5 flex items-center justify-center mx-auto shadow-sm">
+                        <Users className="h-8 w-8 text-primary" />
                     </div>
+
                     <CardTitle className="font-serif text-xl font-bold text-[#1F1F3D]">Espace Soins</CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 pb-10">
@@ -86,7 +89,8 @@ const LoginMedecin = () => {
                                 onValueChange={setSelectedDoctorId}
                                 disabled={doctorsLoading}
                             >
-                                <SelectTrigger className="h-14 rounded-2xl border-none bg-[#F7F7FD]/50 focus:ring-[#5C5CD6]/30 text-base">
+                                <SelectTrigger className="h-14 rounded-2xl border-none bg-[#F7F7FD]/50 focus:ring-primary/30 text-base">
+
                                     <SelectValue placeholder={doctorsLoading ? "Chargement..." : "Sélectionner votre nom..."} />
                                 </SelectTrigger>
                                 <SelectContent className="rounded-2xl border-none bg-white shadow-2xl">
@@ -100,20 +104,23 @@ const LoginMedecin = () => {
                                 placeholder="Mot de passe"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="h-14 rounded-2xl border-none bg-[#F7F7FD]/50 focus-visible:ring-[#5C5CD6]/30 text-base"
+                                className="h-14 rounded-2xl border-none bg-[#F7F7FD]/50 focus-visible:ring-primary/30 text-base"
                                 required
                             />
+
                         </div>
                         <Button
                             type="submit"
-                            className="w-full h-14 bg-[#1F1F3D] hover:bg-[#5C5CD6] text-white rounded-full font-bold shadow-xl shadow-black/10 transition-all active:scale-95 text-base"
+                            className="w-full h-14 bg-primary hover:bg-primary/80 text-primary-foreground rounded-full font-bold shadow-xl shadow-black/10 transition-all active:scale-95 text-base"
                             disabled={loading || !selectedDoctorId}
+
                         >
                             {loading ? 'Connexion...' : 'Se connecter'}
                         </Button>
 
-                        <div className="mt-8 p-6 rounded-[1.8rem] bg-[#5C5CD6]/5 border border-[#5C5CD6]/10 text-center">
-                            <p className="text-[10px] font-black text-[#5C5CD6] uppercase tracking-widest mb-1">Accès Personnel</p>
+                        <div className="mt-8 p-6 rounded-[1.8rem] bg-primary/5 border border-primary/10 text-center">
+                            <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Accès Personnel</p>
+
                             <p className="text-xs text-[#4A4A4A] italic font-light font-serif">Veuillez sélectionner votre nom et entrer votre mot de passe pour accéder au carnet de soins.</p>
                         </div>
                     </form>
