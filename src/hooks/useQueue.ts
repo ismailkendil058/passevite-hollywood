@@ -280,7 +280,11 @@ export function useQueue() {
 
     // Max from queue_entries
     if (qRes.data && qRes.data.length > 0) {
-      maxNumber = qRes.data[0].state_number;
+      const stateNum = qRes.data[0].state_number;
+      // Validate that state_number is reasonable (not a timestamp)
+      if (typeof stateNum === 'number' && stateNum < 100000) {
+        maxNumber = stateNum;
+      }
     }
 
     // Max from completed_clients (parsing numbers from client_id strings)
@@ -289,30 +293,69 @@ export function useQueue() {
         const matches = item.client_id.match(/\d+/);
         if (matches) {
           const num = parseInt(matches[0]);
-          if (num > maxNumber) maxNumber = num;
+          // Only consider reasonable numbers
+          if (num < 100000 && num > maxNumber) maxNumber = num;
         }
       });
     }
 
     const nextNumber = maxNumber + 1;
     const clientId = `${state}${nextNumber}${doctor.initial}`;
-    const position = entries.length + 1;
+    
+    // Get current max position from database for this session to avoid conflicts
+    const { data: maxPosData } = await supabase
+      .from('queue_entries')
+      .select('position')
+      .eq('session_id', activeSession.id)
+      .order('position', { ascending: false })
+      .limit(1);
+    
+    let maxPosition = 0;
+    if (maxPosData && maxPosData.length > 0) {
+      maxPosition = maxPosData[0].position;
+    }
+    
+    const position = maxPosition + 1;
+
+    const insertPayload = {
+      session_id: activeSession.id,
+      phone: phone.trim(),
+      patient_name: patientName?.trim(),
+      state,
+      doctor_id: doctorId,
+      state_number: nextNumber,
+      client_id: clientId,
+      position,
+      appointment_id: appointmentId,
+    };
+
+    console.log('=== addClient Debug Info ===');
+    console.log('Phone:', phone);
+    console.log('State:', state);
+    console.log('Doctor ID:', doctorId);
+    console.log('Doctor:', doctor);
+    console.log('Patient Name:', patientName);
+    console.log('Appointment ID:', appointmentId, 'Type:', typeof appointmentId);
+    console.log('Active Session:', activeSession);
+    console.log('Max Position from DB:', maxPosition);
+    console.log('Calculated Position:', position, 'Type:', typeof position);
+    console.log('State Number:', nextNumber, 'Type:', typeof nextNumber);
+    console.log('Client ID:', clientId);
+    console.log('Insert Payload:', insertPayload);
+    console.log('Payload Keys and Values:');
+    Object.entries(insertPayload).forEach(([key, value]) => {
+      console.log(`  ${key}:`, value, `(type: ${typeof value})`);
+    });
 
     const { data, error } = await supabase
       .from('queue_entries')
-      .insert({
-        session_id: activeSession.id,
-        phone: phone.trim(),
-        patient_name: patientName?.trim(),
-        state,
-        doctor_id: doctorId,
-        state_number: nextNumber,
-        client_id: clientId,
-        position,
-        appointment_id: appointmentId,
-      })
+      .insert(insertPayload)
       .select('*, doctor:doctors(*)')
       .single();
+
+    console.log('Insert Error:', error);
+    console.log('Insert Data:', data);
+    console.log('=== End Debug ===');
 
     if (appointmentId) {
       // Mark appointment as 'coming'
