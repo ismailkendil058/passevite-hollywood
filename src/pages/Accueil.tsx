@@ -1377,7 +1377,7 @@ const Accueil = () => {
               className="h-14 rounded-2xl bg-[#25D366] hover:bg-[#128C7E] text-white border-0 shadow-md font-bold text-md gap-3"
               onClick={() => {
                 if (!lastCompletedPatient) return;
-                const msg = `Bonjour ${lastCompletedPatient.name}, avez-vous aimé votre traitement "${lastCompletedPatient.treatment}" à la clinique PasseVite ?\n\nLaissez-nous votre avis ici : https://passevite.vercel.app/review?phone=${lastCompletedPatient.phone}`;
+                const msg = `Bonjour ${lastCompletedPatient.name}, avez-vous aimé votre traitement "${lastCompletedPatient.treatment}" à la clinique PasseVite ?\n\nLaissez-nous votre avis ici : https://passevite-hollywood.vercel.app/review`;
                 // Clean phone number (remove leading zero and add +213 for Algeria)
                 let cleanPhone = lastCompletedPatient.phone.replace(/\s+/g, '');
                 if (cleanPhone.startsWith('0')) cleanPhone = '213' + cleanPhone.substring(1);
@@ -1398,7 +1398,7 @@ const Accueil = () => {
               className="h-14 rounded-2xl border-2 hover:bg-secondary/50 font-bold text-md gap-3"
               onClick={() => {
                 if (!lastCompletedPatient) return;
-                const msg = `Bonjour ${lastCompletedPatient.name}, avez-vous aimé votre traitement "${lastCompletedPatient.treatment}" à la clinique PasseVite ?\n\nLaissez-nous votre avis ici : https://passevite.vercel.app/review?phone=${lastCompletedPatient.phone}`;
+                const msg = `Bonjour ${lastCompletedPatient.name}, avez-vous aimé votre traitement "${lastCompletedPatient.treatment}" à la clinique PasseVite ?\n\nLaissez-nous votre avis ici : https://passevite-hollywood.vercel.app/review`;
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
                 const smsLink = `sms:${lastCompletedPatient.phone}${isIOS ? '&' : '?'}body=${encodeURIComponent(msg)}`;
                 window.location.href = smsLink;
